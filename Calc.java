@@ -26,6 +26,7 @@ public class Calc {
                 System.exit(0);
             }
         }
+//        aaaa
         String symbol = "null";
         try {
             symbol = dataArray[1];
