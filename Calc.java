@@ -15,9 +15,6 @@ public class Calc {
         Scanner console = new Scanner(System.in);
         String data = console.nextLine();
         String[] dataArray = data.split(" ");
-        for(String arr: dataArray){
-            System.out.println(arr);
-        }
         if (dataArray.length != 3){
             try {
                 throw new IOException();
@@ -35,16 +32,15 @@ public class Calc {
             System.exit(0);
         }
         Roman1 trans = new Roman1();
-        for(String arr: trans.numbers){
-           if(arr.equals(dataArray[0])){
-           }else if(arr.equals(dataArray[2])){
+        for(int i = 0; i < trans.numbers.length; i++){
+            for(int j = 0; j < trans.numbers.length; j++){
+           if(trans.numbers[i].equals(dataArray[0]) && trans.numbers[j].equals(dataArray[2])) {
                dataArray[0] = Integer.toString(trans.romanToInt(dataArray[0]));
                dataArray[2] = Integer.toString(trans.romanToInt(dataArray[2]));
                break;
+                }
            }
         }
-        System.out.println(dataArray[0]);
-        System.out.println(dataArray[2]);
         Nums first = new Nums();
         int operand1 = 0;
         int operand2 = 0;
@@ -130,5 +126,25 @@ class Roman1{
         }
         return result;
     }
+}
 
+class Arabic {
+
+    String arabicToRoman (int a){
+        String result = "";
+        int b = a / 10;
+        if(b == 10){
+            result += "C";
+        }
+        if(b == 9){
+            result += "XC";
+        }
+        if(b == 5){
+            result += "L";
+        }
+        if(b == 1){
+            result += "X";
+        }
+        return result;
+    }
 }
