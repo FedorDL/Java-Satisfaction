@@ -43,15 +43,6 @@ public class Calc {
                break;
            }
         }
-//        for(String arr: trans.numbers){
-//            if(arr.equals(dataArray[2])){
-//                dataArray[2] = Integer.toString(trans.romanToInt(dataArray[2]));
-//            }
-//        }
-//        int a = trans.romanToInt(dataArray[0]);
-//        int b = trans.romanToInt(dataArray[2]);
-//        dataArray[0] = Integer.toString(a);
-//        dataArray[2] = Integer.toString(b);
         System.out.println(dataArray[0]);
         System.out.println(dataArray[2]);
         Nums first = new Nums();
