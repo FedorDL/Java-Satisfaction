@@ -6,8 +6,8 @@ import java.util.HashMap;
 public class Roman {
 
     public static void main(String[] args) {
-        Roman roman = new Roman();
-        System.out.println(roman.romanToInt("XXXIV"));
+        Arabic1 arab = new Arabic1();
+        System.out.println(arab.arabicToRoman(38));
     }
     public int romanToInt (String s) {
         HashMap<Character, Integer> map = new HashMap<>();
@@ -33,3 +33,40 @@ public class Roman {
         return result;
     }
 }
+
+class Arabic1 {
+
+    String arabicToRoman (int a) {
+        String result = "";
+        if (a - 100 == 0) {
+            result = "C";
+        }
+        if (a - 90 >= 0) {
+            result += "XC";
+            a -= 90;
+        } else if (a - 50 >= 0) {
+            result += "L";
+            a -= 50;
+        } else if (a - 40 >= 0) {
+            result += "XL";
+            a -= 40;
+        }
+        while (a > 10 || a - 10 == 0) {
+            result += "X";
+            a -= 10;
+        }
+        if (a - 9 == 0) {
+            result += "IX";
+            a -= 9;
+        }if (a - 5 >= 0){
+            result += "V";
+            a -= 5;
+        }if (a - 4 == 0){
+        result += "IV";
+            a -= 4;
+        }while (a - 1 >= 0) {
+            result += "I";
+            a -= 1;}
+        return result;
+        }
+    }

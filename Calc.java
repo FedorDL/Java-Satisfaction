@@ -23,7 +23,6 @@ public class Calc {
                 System.exit(0);
             }
         }
-//        aaaa
         String symbol = "null";
         try {
             symbol = dataArray[1];
@@ -130,21 +129,37 @@ class Roman1{
 
 class Arabic {
 
-    String arabicToRoman (int a){
+    String arabicToRoman (int a) {
         String result = "";
-        int b = a / 10;
-        if(b == 10){
-            result += "C";
+        if (a - 100 == 0) {
+            result = "C";
         }
-        if(b == 9){
+        if (a - 90 >= 0) {
             result += "XC";
-        }
-        if(b == 5){
+            a -= 90;
+        } else if (a - 50 >= 0) {
             result += "L";
+            a -= 50;
+        } else if (a - 40 >= 0) {
+            result += "XL";
+            a -= 40;
         }
-        if(b == 1){
+        while (a > 10 || a - 10 == 0) {
             result += "X";
+            a -= 10;
         }
+        if (a - 9 == 0) {
+            result += "IX";
+            a -= 9;
+        }if (a - 5 >= 0){
+            result += "V";
+            a -= 5;
+        }if (a - 4 == 0){
+            result += "IV";
+            a -= 4;
+        }while (a - 1 >= 0) {
+            result += "I";
+            a -= 1;}
         return result;
     }
 }
