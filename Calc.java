@@ -30,12 +30,14 @@ public class Calc {
             System.out.println("Вы ввели неправильное выражение. Введите в формате 10 + 2, 5 * 3 и тд.");
             System.exit(0);
         }
+        int flag = 0;
         Roman1 trans = new Roman1();
         for(int i = 0; i < trans.numbers.length; i++){
             for(int j = 0; j < trans.numbers.length; j++){
            if(trans.numbers[i].equals(dataArray[0]) && trans.numbers[j].equals(dataArray[2])) {
                dataArray[0] = Integer.toString(trans.romanToInt(dataArray[0]));
                dataArray[2] = Integer.toString(trans.romanToInt(dataArray[2]));
+               flag = 1;
                break;
                 }
            }
@@ -65,26 +67,31 @@ public class Calc {
             System.out.println("Вы ввели неправильное выражение. Читайте описание работы калькулятора.");
             System.exit(0);
         }
+        Arabic arabic = new Arabic();
+        int lastResult = 0;
         switch (symbol) {
             case "+":
-                System.out.println("Результат: " + first.sum());
+                lastResult = first.sum();
                 break;
             case "-":
-                System.out.println("Результат: " + first.minus());
+                lastResult = first.minus();
                 break;
             case "*":
-                System.out.println("Результат: " + first.multiply());
+                lastResult = first.multiply();
                 break;
             case "/":
-                System.out.println("Результат: " + first.divided());
+                lastResult = first.divided();
                 break;
             default:
                 System.out.println("Выражение не является математической операцией");
         }
-
-
+        if(flag == 0){
+            System.out.println("Результат: " + lastResult);
+        }else{
+            System.out.println("Результат: " + arabic.arabicToRoman(lastResult));
+        }
     }
-    }
+}
 
 class Nums {
     int num1;
@@ -130,6 +137,10 @@ class Roman1{
 class Arabic {
 
     String arabicToRoman (int a) {
+        if(a < 0){
+            System.out.println("В римской системе нет отрицательных чисел");
+            System.exit(0);
+        }
         String result = "";
         if (a - 100 == 0) {
             result = "C";

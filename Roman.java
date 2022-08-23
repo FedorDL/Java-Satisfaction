@@ -7,7 +7,7 @@ public class Roman {
 
     public static void main(String[] args) {
         Arabic1 arab = new Arabic1();
-        System.out.println(arab.arabicToRoman(38));
+        System.out.println(arab.arabicToRoman(-12));
     }
     public int romanToInt (String s) {
         HashMap<Character, Integer> map = new HashMap<>();
@@ -37,6 +37,10 @@ public class Roman {
 class Arabic1 {
 
     String arabicToRoman (int a) {
+        if(a < 0){
+            System.out.println("В римской системе нет отрицательных чисел");
+            System.exit(0);
+        }
         String result = "";
         if (a - 100 == 0) {
             result = "C";
