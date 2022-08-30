@@ -6,8 +6,8 @@ import java.util.HashMap;
 public class Roman {
 
     public static void main(String[] args) {
-        Arabic1 arab = new Arabic1();
-        System.out.println(arab.arabicToRoman(-12));
+        Roman arab = new Roman();
+        System.out.println(arab.romanToInt("VII"));
     }
     public int romanToInt (String s) {
         HashMap<Character, Integer> map = new HashMap<>();

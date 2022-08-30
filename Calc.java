@@ -1,11 +1,12 @@
 package com.Fedor;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Calc {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Здравствуйте! Вы зашли в приложение Калькулятор." +
                 "\nЗдесь вы можете произвести сложение,вычитание,умножение,деление арабских или римских чисел. " +
                 "\nНеобходимо ввести данные в следующем формате 1 + 2,т.е. с пробелами." +
@@ -20,6 +21,7 @@ public class Calc {
 }
 
 class Nums {
+    String[] numberArray = new String[] {"1","2","3","4","5","6","7","8","9","10"};
     int num1;
     int num2;
     int sum(){return num1 + num2;}
@@ -58,10 +60,9 @@ class Roman1{
 
 class Arabic {
 
-    String arabicToRoman (int a) {
+    String arabicToRoman (int a) throws IOException {
         if(a < 0){
-            System.out.println("В римской системе нет отрицательных чисел");
-            System.exit(0);
+            throw new IOException("В римской системе нет отрицательных чисел.");
         }
         String result = "";
         if (a - 100 == 0) {
@@ -98,22 +99,15 @@ class Arabic {
 }
 
 class Main {
-    public static String calc(String input){
+    public static String calc(String input) throws IOException {
         String[] dataArray = input.split(" ");
         if (dataArray.length != 3){
-            try {
-                throw new IOException();
-            }catch (IOException ioe){
-                System.out.println("Вы ввели неправильное выражение. Введите в формате 10 + 2, 5 * 3 и тд.");
-                System.exit(0);
-            }
+            throw new IOException("Вы ввели неправильное выражение. Введите в формате 10 + 2, 5 * 3 и тд.");
         }
-        String symbol = "null";
-        try {
-            symbol = dataArray[1];
-        } catch (ArrayIndexOutOfBoundsException arrIndex) {
-            System.out.println("Вы ввели неправильное выражение. Введите в формате 10 + 2, 5 * 3 и тд.");
-            System.exit(0);
+        String[] symbols =new String[]{"+","-","*","/"};
+        if(Arrays.asList(symbols).contains(dataArray[1])){
+        }else {
+            throw new IOException("Вы ввели неправильное выражение. Введите в формате 10 + 2, 5 * 3 и тд.");
         }
         int flag = 0;
         Roman1 trans = new Roman1();
@@ -123,52 +117,25 @@ class Main {
                     dataArray[0] = Integer.toString(trans.romanToInt(dataArray[0]));
                     dataArray[2] = Integer.toString(trans.romanToInt(dataArray[2]));
                     flag = 1;
-                    break;
                 }
             }
         }
         Nums first = new Nums();
-        int operand1 = 0;
-        int operand2 = 0;
-        try {
-            operand1 = Integer.parseInt(dataArray[0]);
-        }catch (NumberFormatException numbExc){
-            System.out.println("Вы ввели не число. Введите в формате 10 + 2, 5 * 3 и тд.");
-            System.exit(0);
-        }
-        try {
-            operand2 = Integer.parseInt(dataArray[2]);
-        }catch (NumberFormatException numbExc){
-            System.out.println("Вы ввели не число. Введите в формате 10 + 2, 5 * 3 и тд.");
-            System.exit(0);
-        }catch (ArrayIndexOutOfBoundsException arrIndex){
-            System.out.println("Вы ввели неправильное выражение. Введите в формате 10 + 2, 5 * 3 и тд.");
-            System.exit(0);
-        }
-        if (operand1 <= 10 && operand2 <= 10 && operand1 > 0 && operand2 > 0) {
+        if(Arrays.asList(first.numberArray).contains(dataArray[0])
+                && Arrays.asList(first.numberArray).contains(dataArray[2])){
             first.num1 = Integer.parseInt(dataArray[0]);
             first.num2 = Integer.parseInt(dataArray[2]);
-        } else {
-            System.out.println("Вы ввели неправильное выражение. Читайте описание работы калькулятора.");
-            System.exit(0);
+        }else {
+            throw new IOException("Вы ввели неправильное выражение. Введите в формате 10 + 2, 5 * 3 и тд.");
         }
         Arabic arabic = new Arabic();
         int lastResult = 0;
-        switch (symbol) {
-            case "+":
-                lastResult = first.sum();
-                break;
-            case "-":
-                lastResult = first.minus();
-                break;
-            case "*":
-                lastResult = first.multiply();
-                break;
-            case "/":
-                lastResult = first.divided();
-                break;
-            default:
-                System.out.println("Выражение не является математической операцией");
+        switch (dataArray[1]) {
+            case "+" -> lastResult = first.sum();
+            case "-" -> lastResult = first.minus();
+            case "*" -> lastResult = first.multiply();
+            case "/" -> lastResult = first.divided();
+            default -> System.out.println("Выражение не является математической операцией");
         }
         if(flag == 0){
             System.out.println("Результат: " + lastResult);
